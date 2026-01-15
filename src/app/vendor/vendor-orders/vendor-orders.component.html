@@ -1,0 +1,36 @@
+<div class="container py-4">
+  <h3 class="mb-3">🏪 Vendor Orders</h3>
+
+  <p *ngIf="loading">Loading...</p>
+
+  <div *ngFor="let o of orders" class="card shadow-sm p-3 mb-3">
+    <div class="d-flex justify-content-between">
+      <div>
+        <div class="fw-bold">Order: {{ o._id }}</div>
+        <small class="text-muted">User: {{ o.user?.name }} ({{ o.user?.email }})</small>
+      </div>
+      <span class="badge bg-dark">{{ o.status }}</span>
+    </div>
+
+    <hr />
+
+    <div *ngFor="let it of o.items" class="d-flex justify-content-between">
+      <div>{{ it.food?.name }} x {{ it.quantity }}</div>
+      <div>₹ {{ it.food?.price * it.quantity }}</div>
+    </div>
+
+    <div class="mt-3 d-flex gap-2">
+      <button class="btn btn-success"
+              (click)="confirmOrder(o._id)"
+              [disabled]="o.status !== 'PLACED'">
+        Confirm
+      </button>
+
+      <button class="btn btn-warning"
+              (click)="preparingOrder(o._id)"
+              [disabled]="o.status !== 'CONFIRMED'">
+        Preparing
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<app-navbar></app-navbar>
+
+<div class="container py-4">
+  <h3 class="mb-3">🚴 Delivery Dashboard</h3>
+
+  <p *ngIf="loading">Loading...</p>
+
+  <div *ngFor="let o of orders" class="card shadow-sm p-3 mb-3">
+    <div class="d-flex justify-content-between">
+      <div>
+        <div class="fw-bold">{{ o.restaurant?.name }}</div>
+        <small class="text-muted">{{ o.restaurant?.address }}</small>
+      </div>
+      <span class="badge bg-dark">{{ o.status }}</span>
+    </div>
+
+    <hr />
+
+    <div *ngFor="let it of o.items" class="d-flex justify-content-between">
+      <div>{{ it.food?.name }} x {{ it.quantity }}</div>
+      <div>₹ {{ it.food?.price * it.quantity }}</div>
+    </div>
+
+    <div class="mt-3 d-flex gap-2">
+      <button class="btn btn-primary"
+              (click)="outForDelivery(o._id)"
+              [disabled]="o.status !== 'PREPARING' && o.status !== 'CONFIRMED'">
+        Out for delivery
+      </button>
+
+      <button class="btn btn-success"
+              (click)="delivered(o._id)"
+              [disabled]="o.status !== 'OUT_FOR_DELIVERY'">
+        Delivered
+      </button>
+    </div>
+  </div>
+</div>

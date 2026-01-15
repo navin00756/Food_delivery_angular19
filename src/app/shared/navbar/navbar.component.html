@@ -1,0 +1,15 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold" routerLink="/">FoodDelivery</a>
+
+    <div class="ms-auto d-flex gap-2 align-items-center">
+      <span class="text-white small" *ngIf="auth.getUser()">
+        {{ auth.getUser()?.name }} ({{ auth.getUser()?.role }})
+      </span>
+
+      <button class="btn btn-outline-light btn-sm" (click)="logout()" *ngIf="auth.getUser()">
+        Logout
+      </button>
+    </div>
+  </div>
+</nav>

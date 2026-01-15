@@ -1,0 +1,24 @@
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3>📌 Menu</h3>
+    <button class="btn btn-dark" (click)="goCart()">🛒 Cart</button>
+  </div>
+
+  <p *ngIf="loading">Loading...</p>
+
+  <div class="row g-3">
+    <div class="col-md-4" *ngFor="let f of foods">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="mb-1">{{ f.name }}</h5>
+          <p class="text-muted mb-2">{{ f.description }}</p>
+          <h6>₹ {{ f.price }}</h6>
+
+          <button class="btn btn-success w-100 mt-2" (click)="addToCart(f)">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

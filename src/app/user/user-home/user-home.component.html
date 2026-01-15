@@ -1,0 +1,19 @@
+<app-navbar></app-navbar>
+
+<div class="container py-4">
+  <h3 class="mb-3">🍔 Restaurants</h3>
+
+  <p *ngIf="loading">Loading...</p>
+
+  <div class="row g-3">
+    <div class="col-md-4" *ngFor="let r of restaurants">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h5>{{ r.name }}</h5>
+          <p class="text-muted">{{ r.address }}</p>
+          <button class="btn btn-dark w-100" (click)="openMenu(r)">View Menu</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

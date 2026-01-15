@@ -1,0 +1,33 @@
+<app-navbar></app-navbar>
+
+<div class="container py-4">
+  <h3 class="mb-3">👑 Admin Dashboard</h3>
+
+  <div class="card p-3 shadow-sm mb-3">
+    <label class="fw-bold mb-1">Select Delivery Partner</label>
+    <select class="form-control" [(ngModel)]="selectedDeliveryPartnerId">
+      <option value="">-- Select --</option>
+      <option *ngFor="let d of deliveryPartners" [value]="d._id">
+        {{ d.name }} ({{ d.email }})
+      </option>
+    </select>
+  </div>
+
+  <p *ngIf="loading">Loading...</p>
+
+  <div *ngFor="let o of orders" class="card shadow-sm p-3 mb-3">
+    <div class="d-flex justify-content-between">
+      <div>
+        <div class="fw-bold">Order: {{ o._id }}</div>
+        <small class="text-muted">{{ o.restaurant?.name }}</small>
+      </div>
+      <span class="badge bg-dark">{{ o.status }}</span>
+    </div>
+
+    <div class="mt-3">
+      <button class="btn btn-success" (click)="assign(o._id)">
+        Assign Delivery
+      </button>
+    </div>
+  </div>
+</div>
